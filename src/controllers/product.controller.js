@@ -77,6 +77,12 @@ export const removeFromCart = async (req,res) => {
     res.send('Removido')
 }
 
+export const removeAllFromCart = async (req,res) => {
+    console.log('Removido todo del carrito');
+    await userModel.findByIdAndUpdate({_id:req.user.id},{cartData: {}});
+    res.send('Todos los productos removidos del carrito')
+}
+
 export const getCart = async (req,res) => {
     console.log('Obtener Carrito')
     let userData = await userModel.findOne({_id:req.user.id});

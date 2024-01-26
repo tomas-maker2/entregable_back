@@ -1,5 +1,5 @@
 import express from 'express';
-import { addToCart, addproduct, getAllProducts, getById, getCart, newCollections, popularWomen, removeFromCart, removeProduct } from '../controllers/product.controller.js';
+import { addToCart, addproduct, getAllProducts, getById, getCart, newCollections, popularWomen, removeAllFromCart, removeFromCart, removeProduct } from '../controllers/product.controller.js';
 import { fetcheUser } from '../middleware/index.js';
 
 const router = express.Router();
@@ -25,6 +25,9 @@ router.post('/addtocart', fetcheUser , addToCart)
 
 // REMOVE FROM CART
 router.post('/removefromcart', fetcheUser, removeFromCart)
+
+// REMOVE ALL FROM CART
+router.post('/removeallfromcart', fetcheUser,removeAllFromCart )
 
 // GET CART
 router.post('/getcart', fetcheUser, getCart)
