@@ -1,0 +1,166 @@
+paths:
+  /api/products/allproducts:
+    get:
+      summary: Obtiene todos los productos
+      tags:
+        - Products
+      responses:
+        "200":
+          description: Los productos fueron obtenidos de la bd
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Product'
+        "500":
+          description: Algo falló al obtener los productos desde la bd
+  /api/products/addproduct:
+    post:
+      summary: Agregar productos a la bd
+      tags:
+        - Products
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductInput'  
+      responses:
+        "201":
+          description: Producto agregado con éxito
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+        "500":
+          description: Algo falló al agregar el producto a la bd
+  /api/products/newcollections:
+    get:
+      summary: Obtiene una nueva colección de productos
+      tags:
+        - Products
+      responses:
+        "200":
+          description: Nueva colección de productos obtenida de la bd
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Product'
+        "500":
+          description: Algo falló al obtener la nueva colección de productos desde la bd
+  /api/products/popularwomen:
+    get:
+      summary: Obtiene productos populares para mujeres
+      tags:
+        - Products
+      responses:
+        "200":
+          description: Productos populares para mujeres obtenidos de la bd
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Product'
+        "500":
+          description: Algo falló al obtener productos populares para mujeres desde la bd
+  /api/products/find/{id}:
+    get:
+      summary: Obtiene un producto por su ID
+      tags:
+        - Products
+      parameters:
+        - in: path
+          name: id
+          required: true
+          description: ID del producto a buscar
+          schema:
+            type: string  
+      responses:
+        "200":
+          description: Producto encontrado exitosamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+        "404":
+          description: Producto no encontrado
+        "500":
+          description: Error interno del servidor
+components:
+  schemas:
+    Product:
+      type: object
+      properties:
+        _id: 
+          type: ObjectId
+          description: Id de mongo
+        name:
+          type: String
+          description: Nombre del artículo
+        image:
+          type: String
+          description: Imagen del artículo
+        category:
+          type: String
+          description: Categoría del producto
+        new_price:
+          type: Number
+          description: Nuevo precio
+        old_price:
+          type: Number
+          description: Precio viejo
+        date:
+          type: Date
+          description: Fecha
+        available:
+          type: Boolean
+          description: Disponibilidad del producto
+      example:
+        _id: ObjectId("asd")
+        name: prodtest
+        image: test
+        category: women
+        new_price: 100
+        old_price: 120
+        date: 01/17/24
+        available: true
+    ProductInput:  
+      type: object
+      properties:
+        name:
+          type: String
+          description: Nombre del artículo
+        image:
+          type: String
+          description: Imagen del artículo
+        category:
+          type: String
+          description: Categoría del producto
+        new_price:
+          type: Number
+          description: Nuevo precio
+        old_price:
+          type: Number
+          description: Precio viejo
+        date:
+          type: Date
+          description: Fecha
+        available:
+          type: Boolean
+          description: Disponibilidad del producto
+      example:
+        name: prodtest
+        image: test
+        category: women
+        new_price: 100
+        old_price: 120
+        date: 01/17/24
+        available: true
+
+
+
+
